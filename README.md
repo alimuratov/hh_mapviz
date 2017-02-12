@@ -1,6 +1,6 @@
 # Google Maps Satellite + MapProxy
 
-Run [MapProxy](https://mapproxy.org/) in a Docker container to proxy Google Maps satellite view into a [WMTS](https://en.wikipedia.org/wiki/Web_Map_Tile_Service) tile service. 
+Run [MapProxy](https://mapproxy.org/) in a Docker container to proxy Google Maps satellite view into a [WMTS](https://en.wikipedia.org/wiki/Web_Map_Tile_Service) tile service, or WMS, or TMS standard format. 
 ![MapProxy Demo](https://github.com/danielsnider/docker-mapproxy-googlemaps/raw/master/readme-imgs/demo.PNG)
 ![MapProxy Demo](https://github.com/danielsnider/docker-mapproxy-googlemaps/raw/master/readme-imgs/googlemaps.PNG)
 
