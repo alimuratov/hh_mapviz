@@ -1,19 +1,26 @@
 # Google Maps Satellite + MapProxy
 
-Run [MapProxy](https://mapproxy.org/) in a Docker container to proxy Google Maps satellite view into a [WMTS](https://en.wikipedia.org/wiki/Web_Map_Tile_Service) tile service. 
-![MapProxy Demo](https://github.com/danielsnider/docker-mapproxy-googlemaps/raw/master/readme-imgs/demo.PNG)
-![MapProxy Demo](https://github.com/danielsnider/docker-mapproxy-googlemaps/raw/master/readme-imgs/googlemaps.PNG)
+Run [MapProxy](https://mapproxy.org/) in a Docker container to proxy Google Maps satellite view into a WMS, TMS, or  [WMTS](https://en.wikipedia.org/wiki/Web_Map_Tile_Service) tile service. 
+
+### `tldr:`
+
+```
+$ docker run -p 8080:8080 -d -t -v ~/mapproxy:/mapproxy danielsnider/mapproxy
+```
+
+
+#### Result:
+
 
 MapProxy documentation: https://mapproxy.org/docs/nightly/tutorial.html
 
 
 ## Setup
 
-1.1. Create the MapProxy configuration folder and yaml file. The cached map tiles will be written to `~/mapproxy/cache_data`.
+1.1. Create the MapProxy configuration folder. The cached map tiles will be written to `~/mapproxy/cache_data`.
 
 ```
 mkdir ~/mapproxy/
-cp ./mapproxy.yaml ~/mapproxy/
 ```
 
 1.2 (Optionally) add your own `mapproxy.yaml` configuration file to override the default of proxying Google Maps satellite view over WMTS, WMS, and TMS protocols.
