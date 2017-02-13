@@ -12,6 +12,10 @@ $ docker run -p 8080:8080 -d -t -v ~/mapproxy:/mapproxy danielsnider/mapproxy
 #### Result:
 
 
+![MapProxy Demo](https://github.com/danielsnider/docker-mapproxy-googlemaps/raw/master/readme-imgs/demo.PNG)
+
+![MapProxy Demo](https://github.com/danielsnider/docker-mapproxy-googlemaps/raw/master/readme-imgs/googlemaps.PNG)
+
 MapProxy documentation: https://mapproxy.org/docs/nightly/tutorial.html
 
 
