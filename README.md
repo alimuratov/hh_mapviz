@@ -9,11 +9,17 @@ MapProxy documentation: https://mapproxy.org/docs/nightly/tutorial.html
 
 ## Setup
 
-Create the MapProxy configuration folder and yaml file. The cached map tiles will be written to `~/mapproxy/cache_data`.
+1.1. Create the MapProxy configuration folder and yaml file. The cached map tiles will be written to `~/mapproxy/cache_data`.
 
 ```
 mkdir ~/mapproxy/
 cp ./mapproxy.yaml ~/mapproxy/
+```
+
+1.2 (Optionally) add your own `mapproxy.yaml` configuration file to override the default of proxying Google Maps satellite view over WMTS, WMS, and TMS protocols.
+
+```
+cp mapproxy.yaml ~/mapproxy/mapproxy.yaml
 ```
 
 ## Run 
@@ -32,6 +38,6 @@ You can also see the first map tile by browsing to [http://localhost:8080/wmts/g
 
 ## Notes
 
-1. Note that the mapproxy process will run as the user who owns the ~/mapproxy folder.
+### Google Terms & Conditions 
 
-2. Google Terms & Conditions: In 2013 there was [some discussion](http://gis.stackexchange.com/questions/56982/how-to-use-mapproxy-to-serve-wms-from-reprojected-google-maps-tiles) about Google's Terms & Conditions stating that you are only allowed to access the tiles through Google's API (ie. not MapProxy). I'm not aware if this is still the case.
+In 2013 there was [some discussion](http://gis.stackexchange.com/questions/56982/how-to-use-mapproxy-to-serve-wms-from-reprojected-google-maps-tiles) about Google's Terms & Conditions stating that you are only allowed to access the tiles through Google's API (ie. not MapProxy).

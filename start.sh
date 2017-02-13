@@ -1,10 +1,8 @@
 #!/bin/bash
-USER_ID=`ls -lahn / | grep mapproxy | awk '{print $3}'`
-GROUP_ID=`ls -lahn / | grep mapproxy | awk '{print $4}'`
-USER_NAME=`ls -lah / | grep mapproxy | awk '{print $3}'`
 
-groupadd -g $GROUP_ID mapproxy
-useradd --shell /bin/bash --uid $USER_ID --gid $GROUP_ID $USER_NAME
+if [ ! -f /mapproxy/mapproxy.yaml ]; then
+    cp /mapproxy.yaml /mapproxy/mapproxy.yaml
+fi
 
 cd /mapproxy
-su $USER_NAME -c "mapproxy-util serve-develop -b 0.0.0.0:8080 mapproxy.yaml"
+mapproxy-util serve-develop -b 0.0.0.0:8080 mapproxy.yaml
