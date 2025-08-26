@@ -1,6 +1,6 @@
 # hh_mapviz
 
 ## Overview
+This repository contains the files and instructions for installing a working mapviz with docker file for ARM architecture. This branch `main` only contains read me.  
 
-This repository contains the files and instructions for installing a working mapviz for ARM architecture pulling in Open Street Map.
-1. Switc to mapviz
+1. Install mapviz package in ROS
