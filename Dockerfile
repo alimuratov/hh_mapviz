@@ -1,30 +1,70 @@
-#--------- Generic stuff all our Dockerfiles should start with so we get caching ------------
-FROM python:2.7
-MAINTAINER Daniel Snider<danielsnider12@gmail.com>
+# ===================================================================
+# Stage 1: Define Base Image & Environment
+# ===================================================================
+# Use a slim, modern, and multi-arch compatible Python base image.
+FROM python:3.9-slim-bullseye
 
-RUN apt-get -y update
+# Use LABEL instead of the deprecated MAINTAINER instruction.
+LABEL maintainer="Daniel Snider <danielsnider12@gmail.com>"
 
-#-------------Application Specific Stuff ----------------------------------------------------
+# Set environment variables and a consistent home directory.
+ENV PYTHONUNBUFFERED=1
+ENV APP_HOME=/mapproxy
+WORKDIR $APP_HOME
 
-RUN apt-get install -y \
-    python-imaging \
-    python-yaml \
-    libproj0 \
-    libgeos-dev \
-    python-lxml \
-    libgdal-dev \
+# ===================================================================
+# Stage 2: Install Dependencies
+# ===================================================================
+# Install system dependencies in a single layer to optimize image size.
+# Use apt-get for C libraries and build tools required by Python packages.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Build tools for compiling Python packages from source
     build-essential \
-    python-dev \
+    # Required C-libraries for geospatial packages
+    libgdal-dev \
+    libgeos-dev \
+    libproj-dev \
+    # Required C-libraries for the Pillow imaging package
     libjpeg-dev \
     zlib1g-dev \
     libfreetype6-dev \
-    python-virtualenv
-RUN pip install Shapely Pillow MapProxy uwsgi
+    # Clean up the apt cache to keep the final image small.
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
+# Install Python packages using pip in a separate layer for better caching.
+# --no-cache-dir also reduces image size.
+RUN pip install --no-cache-dir \
+    "Shapely<2.0" \
+    Pillow \
+    PyYAML \
+    lxml \
+    MapProxy \
+    uwsgi
+
+# ===================================================================
+# Stage 3: Add Application Code & Set Permissions
+# ===================================================================
+# Use COPY for simple file transfers; it's more explicit than ADD.
+COPY ./mapproxy.yaml ./start.sh ./
+
+# Create a non-root user for security and assign ownership of the app directory.
+# Running containers as a non-root user is a critical security measure.
+RUN addgroup --system app && adduser --system --ingroup app app
+RUN chown -R app:app $APP_HOME
+
+# Switch to the non-root user.
+USER app
+
+# Make the startup script executable.
+RUN chmod +x ./start.sh
+
+# ===================================================================
+# Stage 4: Define Runtime Configuration
+# ===================================================================
+# Expose the port that the application will listen on.
 EXPOSE 8080
 
-ADD mapproxy.yaml /mapproxy.yaml
-ADD start.sh /start.sh
-RUN chmod 0755 /start.sh
-
-CMD /start.sh
+# Use the "exec form" for CMD. This is a best practice that ensures
+# signals like `docker stop` are handled correctly by the application.
+CMD ["./start.sh"]

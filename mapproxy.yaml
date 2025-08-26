@@ -32,7 +32,8 @@ layers:
 
 caches:
   gm_cache:
-    grids: [gm_grid]
+    # Use the standard webmercator grid
+    grids: [webmercator]
     sources: [gm]
     cache:
       type: file
@@ -41,12 +42,20 @@ caches:
 sources:
   gm:
     type: tile
-    url: http://mt0.google.com/vt/lyrs=s@0&hl=en&x=%(x)s&y=%(y)s&z=%(z)s
-    grid: gm_grid
+    url: https://a.tile.openstreetmap.org/%(z)s/%(x)s/%(y)s.png
+    # IMPORTANT: Reference the correct grid here
+    grid: webmercator
 
 grids:
-  gm_grid:
+  # Use the standard webmercator grid definition
+  webmercator:
     base: GLOBAL_MERCATOR
-    origin: ul
+    origin: nw
+
 
 globals:
+  cache:
+    # Use a directory that is writable by any user
+    base_dir: /tmp/mapproxy/cache_data
+    # Use a file-based lock in a writable directory
+    lock_dir: /tmp/mapproxy/locks
