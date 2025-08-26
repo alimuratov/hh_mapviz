@@ -1,4 +1,4 @@
-THis code has been modified from https://github.com/danielsnider/docker-mapproxy-googlemaps to accomodate the docker file for ARM architecture. Please refer to README.md in main branch first.
+This code has been modified from https://github.com/danielsnider/docker-mapproxy-googlemaps to accomodate the docker file for ARM architecture. Please refer to README.md in main branch first.
 
 # Google Maps Satellite + MapProxy
 
