@@ -1,3 +1,5 @@
+THis code has been modified from https://github.com/danielsnider/docker-mapproxy-googlemaps to accomodate the docker file for ARM architecture. Please refer to README.md in main branch first.
+
 # Google Maps Satellite + MapProxy
 
 Run [MapProxy](https://mapproxy.org/) in a Docker container to proxy Google Maps satellite view into a WMS, TMS, or  [WMTS](https://en.wikipedia.org/wiki/Web_Map_Tile_Service) tile service. 
