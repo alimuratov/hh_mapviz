@@ -33,11 +33,12 @@ sudo docker run -d -p 8080:8080 --name mapproxy-service -v ~/hh_mapviz:/mapproxy
 7. Verify that it is working properly
     [link to map](http://127.0.0.1:8080/demo/)
 
-8. Open mapviz
+8. In the mapviz config package, change the location to roughly where you are at so the map can center itself on the display.
+9. Open mapviz
 ``` roslaunch mapviz mapviz.launch ```
-9. Click add and select tile_map in mapviz, In the new tile_map, change source to custom wmts source
-10. Change base url: to `http://localhost:8080/wmts/gm_layer/webmercator/{level}/{x}/{y}.png`
-11. To add gps fix, add navsat topic and make sure gps_rtk driver is running.
-12. In config file, edit the location to roughly where you want.
+10. Click add and select tile_map in mapviz, In the new tile_map, change source to custom wmts source
+11. Change base url: to `http://localhost:8080/wmts/gm_layer/webmercator/{level}/{x}/{y}.png`
+12. To add gps fix, add navsat topic and make sure gps_rtk driver is running.
+13. In config file, edit the location to roughly where you want.
 
 
