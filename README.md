@@ -33,7 +33,14 @@ sudo docker run -d -p 8080:8080 --name mapproxy-service -v ~/hh_mapviz:/mapproxy
 7. Verify that it is working properly
     [link to map](http://127.0.0.1:8080/demo/)
 
-8. In the mapviz config package, change the location to roughly where you are at so the map can center itself on the display.
+8. In the mapviz package, change the location to roughly where you are at in the launch file so the map can center itself on the display.
+    ```
+    rospack find mapviz
+    cd [whatever path rospack find mapviz]
+    cd launch
+    sudo nano mapviz.launch
+    ```
+    
 9. Open mapviz
 ``` roslaunch mapviz mapviz.launch ```
 10. Click add and select tile_map in mapviz, In the new tile_map, change source to custom wmts source
